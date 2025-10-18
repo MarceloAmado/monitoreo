@@ -75,10 +75,16 @@ services:
         condition: service_healthy
     environment:
       # Base de datos
-      DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@postgres:5432/${DB_NAME}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: postgres
+      DB_PORT: 5432
 
       # Redis
-      REDIS_URL: redis://redis:6379/0
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_DB: 0
 
       # JWT y Seguridad
       JWT_SECRET_KEY: ${JWT_SECRET_KEY}
@@ -128,30 +134,31 @@ services:
   # Frontend React + Vite (Desarrollo)
   # ============================================================
   # Nota: En producción, usar build estático servido por Nginx
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile.dev
-      target: development
-    container_name: iot_frontend
-    restart: unless-stopped
-    depends_on:
-      - backend
-    environment:
-      VITE_API_BASE_URL: ${VITE_API_BASE_URL}
-      VITE_APP_NAME: ${VITE_APP_NAME}
-      VITE_ENVIRONMENT: ${VITE_ENVIRONMENT}
-    ports:
-      - "3000:3000"
-    volumes:
-      # Hot reload en desarrollo
-      - ./frontend/src:/app/src
-      - ./frontend/public:/app/public
-      - ./frontend/index.html:/app/index.html
-      # Evitar montar node_modules (usar los del container)
-      - /app/node_modules
-    networks:
-      - iot_network
+  # COMENTADO TEMPORALMENTE - Se implementará en Sprint 2
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile.dev
+  #     target: development
+  #   container_name: iot_frontend
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - backend
+  #   environment:
+  #     VITE_API_BASE_URL: ${VITE_API_BASE_URL}
+  #     VITE_APP_NAME: ${VITE_APP_NAME}
+  #     VITE_ENVIRONMENT: ${VITE_ENVIRONMENT}
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     # Hot reload en desarrollo
+  #     - ./frontend/src:/app/src
+  #     - ./frontend/public:/app/public
+  #     - ./frontend/index.html:/app/index.html
+  #     # Evitar montar node_modules (usar los del container)
+  #     - /app/node_modules
+  #   networks:
+  #     - iot_network
 
 # ============================================================
 # Volúmenes Persistentes

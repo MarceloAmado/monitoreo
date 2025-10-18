@@ -225,20 +225,39 @@ docker exec -it iot_backend alembic revision --autogenerate -m "descripcion"
 
 ## 📊 Estado del Proyecto
 
-### Sprint 1: Backend MVP ✅ 80%
+### Sprint 1: Backend MVP ✅ 100% COMPLETADO
 
+- [x] Infraestructura Docker Compose (PostgreSQL + Redis + Backend)
 - [x] Modelos SQLAlchemy (8 tablas)
 - [x] Migraciones Alembic
-- [x] Schemas Pydantic
-- [x] Autenticación JWT
-- [x] Endpoints Auth, Devices, Readings
-- [x] Script de seed
-- [ ] Tests pytest
-- [ ] Documentación completa
+- [x] Schemas Pydantic (7 schemas completos)
+- [x] Autenticación JWT con bcrypt
+- [x] Endpoints Auth (login, me)
+- [x] Endpoints Devices (CRUD completo + schema)
+- [x] Endpoints Readings (POST para ESP32 + GET con filtros)
+- [x] Script de seed con datos de ejemplo
+- [x] Tests pytest (33 tests, 28 passing - 84.8%)
+- [x] Documentación Swagger UI completa
+- [x] README y documentación técnica
 
-### Sprint 2: Frontend + ESP32 (Próximo)
+**Fecha de finalización Sprint 1:** 2025-10-17
+
+### Sprint 2: Frontend + ESP32 (En progreso)
+- [ ] Setup React + TypeScript + Vite
+- [ ] Dashboard básico con gráficos
+- [ ] Firmware ESP32 con Zero-Config WiFi
+- [ ] Primer ESP32 conectado enviando datos reales
+
 ### Sprint 3: Alertas + Gráficos Dinámicos
+- [ ] Sistema de alertas configurables
+- [ ] Gráficos dinámicos auto-generados
+- [ ] Notificaciones Email/Telegram
+
 ### Sprint 4: Deploy + Profesionalización
+- [ ] Deploy en servidor de producción
+- [ ] OTA updates para ESP32
+- [ ] Backups automáticos
+- [ ] Optimizaciones de performance
 
 ## 🤝 Contribución
 

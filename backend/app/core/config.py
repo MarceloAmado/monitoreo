@@ -8,7 +8,7 @@ usando Pydantic Settings para validación automática.
 
 from typing import List, Optional
 from pydantic import field_validator
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -142,13 +142,12 @@ class Settings(BaseSettings):
     # ============================================================
     # Configuración de Pydantic Settings
     # ============================================================
-    class Config:
-        """Configuración de Pydantic Settings."""
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-        case_sensitive = False
-        # Permitir campos extra en el .env sin errores
-        extra = "ignore"
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        case_sensitive=False,
+        extra="ignore"
+    )
 
 
 # ============================================================

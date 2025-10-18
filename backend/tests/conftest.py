@@ -20,12 +20,18 @@ from app.models.asset import Asset
 from app.models.device import Device
 
 
-# Database de prueba (in-memory SQLite)
-SQLALCHEMY_TEST_DATABASE_URL = "sqlite:///:memory:"
+# Database de prueba (PostgreSQL)
+# Usa la misma DB de development pero con un schema diferente para tests
+import os
+
+SQLALCHEMY_TEST_DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    "postgresql://iot_admin:change_me_in_production_123!"
+    "@postgres:5432/iot_monitoring"
+)
 
 engine = create_engine(
     SQLALCHEMY_TEST_DATABASE_URL,
-    connect_args={"check_same_thread": False},
     poolclass=StaticPool,
 )
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

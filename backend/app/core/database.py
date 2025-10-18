@@ -7,7 +7,7 @@ Proporciona el engine, sessionmaker y la base declarativa para los modelos.
 """
 
 from typing import Generator
-from sqlalchemy import create_engine, event
+from sqlalchemy import create_engine, event, text
 from sqlalchemy.orm import sessionmaker, Session, declarative_base
 from sqlalchemy.pool import QueuePool
 
@@ -154,7 +154,7 @@ def check_db_connection() -> bool:
     try:
         # Intentar obtener una sesión y hacer una query simple
         db = SessionLocal()
-        db.execute("SELECT 1")
+        db.execute(text("SELECT 1"))
         db.close()
         return True
     except Exception as e:
